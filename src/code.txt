@@ -1,0 +1,12 @@
+/****Task computation phase, amount and type of the computation are inputs ****/
+void comp_bench(int mpi_rank)
+{
+	double wtime = 0.0;
+	for (int i = 0; i < COMP_TYPES_NUM; i++)
+	{
+		wtime = MPI_Wtime();
+		execute_load(i);
+		wtime = MPI_Wtime() - wtime;
+		std::cout << "\tP" << mpi_rank << ",\tcomputation type \t" << i << ": " << i << "\t" << wtime << std::endl;
+	}
+}
